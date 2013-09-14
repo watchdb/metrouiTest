@@ -29,7 +29,6 @@ namespace MetroUITest
         public static string DB_USER = "";
         public static string DB_PASSWORD = "";
         public static string DATA_DIR = "";
-        public static string EXPORT_DAYS = "1";
 
         public static string FTP_IP = "";
         public static string FTP_USER = "";
@@ -58,12 +57,16 @@ namespace MetroUITest
             if (env.StartsWith(ENV_EXPORT)) //导出环境
             {
                 this.importDataBtn.Visible = false;
-                
             }
             else 
             {
                 this.exportDataBtn.Visible = false;
             }
+
+            DateTime today = DateTime.Now;
+            DateTime yestoday = today.AddDays(-1);
+            this.exportBeginDate.Text = yestoday.ToShortDateString();
+            this.exportEndDate.Text = yestoday.ToShortDateString();
         }
 
         public Form1(string[] args)
@@ -94,11 +97,13 @@ namespace MetroUITest
                 this.backgroundImportData(true);
             }
 
+            DateTime today = DateTime.Now;
+            DateTime yestoday = today.AddDays(-1);
+            this.exportBeginDate.Text = yestoday.ToShortDateString();
+            this.exportEndDate.Text = yestoday.ToShortDateString();
             ////////////////////////////////////////////////////////
             this.systemWarnLbl.Visible = true;
-
-
-
+            
         }
 
         private static void initData()
@@ -119,11 +124,6 @@ namespace MetroUITest
             {
                 Directory.CreateDirectory(DATA_DIR);
             }
-            if (ConfigUtil.getConfig("env").Equals("export"))
-            {
-                EXPORT_DAYS = ConfigUtil.getConfig(env + "export_days");
-            }
-            
 
             FTP_IP = ConfigUtil.getConfig(env + "ftp.ip");
             FTP_USER = ConfigUtil.getConfig(env + "ftp.user");
@@ -181,7 +181,8 @@ namespace MetroUITest
 
             if (isBackground)
             {
-           //     System.Diagnostics.Process.GetCurrentProcess().Kill();
+                System.Diagnostics.Process.Start("success.jpg");
+                System.Diagnostics.Process.GetCurrentProcess().Kill(); 
             }
         }
 
@@ -266,7 +267,7 @@ namespace MetroUITest
             {
                 table = tableList[i];
                 selectInsertSql = Constraint.getInsertSql(table);
-                createScriptFile(table, selectInsertSql,EXPORT_DAYS);
+                createScriptFile(table, selectInsertSql);
             }
         }
 
@@ -275,7 +276,7 @@ namespace MetroUITest
        　/// </summary>
        　/// <param name="tableName"></param>
        　/// <param name="selectInsertSql"></param>
-        private void createScriptFile(string tableName, string selectInsertSql,string exportDays)
+        private void createScriptFile(string tableName, string selectInsertSql)
         {
             //创建导出脚本
             string exportBeginDateStr = this.exportBeginDate.Text;
@@ -409,12 +410,10 @@ namespace MetroUITest
             //   t.Name = "NodeThread";
             //开始新线程 
             t.Start();
-            if (!isBackground)
-            {
-                this.progressBar1.Show();
-                this.importDataBtn.Text = "请稍等...";
-                this.importDataBtn.Enabled = false;
-            }
+
+            this.progressBar1.Show();
+            this.importDataBtn.Text = "请稍等...";
+            this.importDataBtn.Enabled = false;
 
             //设置一个循环来等待子线程结束 
             while (t.ThreadState != System.Threading.ThreadState.Stopped)
@@ -423,16 +422,18 @@ namespace MetroUITest
                 t.Join(10);
             }
 
+            this.importDataBtn.Text = "导出";
+            this.importDataBtn.Enabled = true;
+            this.progressBar1.Hide();
+
             if (!isBackground)
             {
-                this.importDataBtn.Text = "导出";
-                this.importDataBtn.Enabled = true;
-                this.progressBar1.Hide();
                 MessageBox.Show("导入成功","提示");
             }
 
             if (isBackground)
             {
+                System.Diagnostics.Process.Start("success.jpg");
                 System.Diagnostics.Process.GetCurrentProcess().Kill();
             }
         }
@@ -589,17 +590,19 @@ namespace MetroUITest
          //   testFTP();
 
 
-            DBUtil dbUtil = new DBUtil(DB_SID, DB_USER, DB_PASSWORD);
-            try
-            {
-                MessageBox.Show(DB_SID + "   " + DB_USER + "   " + DB_PASSWORD);
-                dbUtil.GetRecordCount("select * from jbxx");
-                MessageBox.Show("数据库执行成功");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("数据库执行失败" + ex.Message);
-            }
+            //DBUtil dbUtil = new DBUtil(DB_SID, DB_USER, DB_PASSWORD);
+            //try
+            //{
+            //    MessageBox.Show(DB_SID + "   " + DB_USER + "   " + DB_PASSWORD);
+            //    dbUtil.GetRecordCount("select * from jbxx");
+            //    MessageBox.Show("数据库执行成功");
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("数据库执行失败" + ex.Message);
+            //}
+
+            
 
         }
 

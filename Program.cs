@@ -23,7 +23,6 @@ namespace MetroUITest
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var arguments = Environment.GetCommandLineArgs();
-            MessageBox.Show(arguments.Length + "" + arguments[0]);
             if (arguments.Length > 1)
             {
                 Application.Run(new Form1(arguments));

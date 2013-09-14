@@ -35,9 +35,11 @@ namespace MetroUITest
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.exportDataBtn = new MetroFramework.Controls.MetroButton();
             this.tabControl1 = new MetroFramework.Controls.MetroTabControl();
             this.tabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.systemWarnLbl = new MetroFramework.Controls.MetroLabel();
             this.button1 = new MetroFramework.Controls.MetroButton();
             this.exportBeginDate = new System.Windows.Forms.DateTimePicker();
             this.exportEndDate = new System.Windows.Forms.DateTimePicker();
@@ -46,9 +48,6 @@ namespace MetroUITest
             this.progressBar1 = new MetroFramework.Controls.MetroProgressSpinner();
             this.importDataBtn = new MetroFramework.Controls.MetroButton();
             this.tabPage2 = new MetroFramework.Controls.MetroTabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.configTestBtn = new MetroFramework.Controls.MetroButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ftpDirTxt = new System.Windows.Forms.TextBox();
@@ -67,11 +66,9 @@ namespace MetroUITest
             this.dbSidTxt = new System.Windows.Forms.TextBox();
             this.dbSidLbl = new MetroFramework.Controls.MetroLabel();
             this.oracleConnection1 = new System.Data.OracleClient.OracleConnection();
-            this.systemWarnLbl = new MetroFramework.Controls.MetroLabel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -138,6 +135,25 @@ namespace MetroUITest
             this.tabPage1.VerticalScrollbarHighlightOnWheel = false;
             this.tabPage1.VerticalScrollbarSize = 10;
             // 
+            // systemWarnLbl
+            // 
+            this.systemWarnLbl.AutoSize = true;
+            this.systemWarnLbl.CustomBackground = false;
+            this.systemWarnLbl.CustomForeColor = false;
+            this.systemWarnLbl.FontSize = MetroFramework.MetroLabelSize.Medium;
+            this.systemWarnLbl.FontWeight = MetroFramework.MetroLabelWeight.Light;
+            this.systemWarnLbl.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
+            this.systemWarnLbl.Location = new System.Drawing.Point(126, 111);
+            this.systemWarnLbl.Name = "systemWarnLbl";
+            this.systemWarnLbl.Size = new System.Drawing.Size(163, 19);
+            this.systemWarnLbl.Style = MetroFramework.MetroColorStyle.Blue;
+            this.systemWarnLbl.StyleManager = null;
+            this.systemWarnLbl.TabIndex = 109;
+            this.systemWarnLbl.Text = "系统运行中，请勿操作！";
+            this.systemWarnLbl.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.systemWarnLbl.UseStyleColors = false;
+            this.systemWarnLbl.Visible = false;
+            // 
             // button1
             // 
             this.button1.Highlight = false;
@@ -149,6 +165,7 @@ namespace MetroUITest
             this.button1.TabIndex = 108;
             this.button1.Text = "测试";
             this.button1.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_2);
             // 
             // exportBeginDate
@@ -234,7 +251,6 @@ namespace MetroUITest
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.configTestBtn);
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.groupBox2);
@@ -257,43 +273,6 @@ namespace MetroUITest
             this.tabPage2.VerticalScrollbarBarColor = true;
             this.tabPage2.VerticalScrollbarHighlightOnWheel = false;
             this.tabPage2.VerticalScrollbarSize = 10;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.textBox1);
-            this.groupBox3.Controls.Add(this.metroLabel3);
-            this.groupBox3.Location = new System.Drawing.Point(6, 165);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(204, 86);
-            this.groupBox3.TabIndex = 110;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "导出配置";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(77, 24);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(95, 21);
-            this.textBox1.TabIndex = 12;
-            // 
-            // metroLabel3
-            // 
-            this.metroLabel3.AutoSize = true;
-            this.metroLabel3.CustomBackground = false;
-            this.metroLabel3.CustomForeColor = false;
-            this.metroLabel3.FontSize = MetroFramework.MetroLabelSize.Medium;
-            this.metroLabel3.FontWeight = MetroFramework.MetroLabelWeight.Light;
-            this.metroLabel3.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.metroLabel3.Location = new System.Drawing.Point(13, 24);
-            this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(51, 19);
-            this.metroLabel3.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroLabel3.StyleManager = null;
-            this.metroLabel3.TabIndex = 11;
-            this.metroLabel3.Text = "天数：";
-            this.metroLabel3.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroLabel3.UseStyleColors = false;
             // 
             // configTestBtn
             // 
@@ -524,25 +503,6 @@ namespace MetroUITest
             this.dbSidLbl.Theme = MetroFramework.MetroThemeStyle.Light;
             this.dbSidLbl.UseStyleColors = false;
             // 
-            // systemWarnLbl
-            // 
-            this.systemWarnLbl.AutoSize = true;
-            this.systemWarnLbl.CustomBackground = false;
-            this.systemWarnLbl.CustomForeColor = false;
-            this.systemWarnLbl.FontSize = MetroFramework.MetroLabelSize.Medium;
-            this.systemWarnLbl.FontWeight = MetroFramework.MetroLabelWeight.Light;
-            this.systemWarnLbl.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.systemWarnLbl.Location = new System.Drawing.Point(126, 111);
-            this.systemWarnLbl.Name = "systemWarnLbl";
-            this.systemWarnLbl.Size = new System.Drawing.Size(163, 19);
-            this.systemWarnLbl.Style = MetroFramework.MetroColorStyle.Blue;
-            this.systemWarnLbl.StyleManager = null;
-            this.systemWarnLbl.TabIndex = 109;
-            this.systemWarnLbl.Text = "系统运行中，请勿操作！";
-            this.systemWarnLbl.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.systemWarnLbl.UseStyleColors = false;
-            this.systemWarnLbl.Visible = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -550,17 +510,16 @@ namespace MetroUITest
             this.ClientSize = new System.Drawing.Size(534, 399);
             this.Controls.Add(this.tabControl1);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(0, 0);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Resizable = false;
-            this.Text = "ZJS Data Export";
+            this.Text = "ZJS Data Sync";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -600,9 +559,6 @@ namespace MetroUITest
         private System.Windows.Forms.TextBox dbSidTxt;
         private MetroLabel dbSidLbl;
         private MetroButton configTestBtn;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox textBox1;
-        private MetroLabel metroLabel3;
         private MetroLabel systemWarnLbl;
     }
 }
